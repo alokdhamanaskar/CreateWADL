@@ -96,7 +96,7 @@ public class EventHandler implements RequestHandler<ScheduledEvent, String> {
  
     private List<KeyVersion> processEventsInBucket(String bucketName, LambdaLogger logger, ConcurrentHashMap<String, Pair<Long, String>> latestStatusForTrackingNumber) { 
  
-        final AmazonS3 s3Client = EventHandler.getS3Client(); 
+        final AmazonS3 s3Client = EventHandler.getS3Client2(); 
         logger.log("Processing Bucket: " + bucketName); 
  
         ObjectListing files = s3Client.listObjects(bucketName); 
@@ -170,6 +170,8 @@ public class EventHandler implements RequestHandler<ScheduledEvent, String> {
         return AmazonS3ClientBuilder.standard().withRegion(Regions.DEFAULT_REGION).build(); 
     } 
      
-     
+    public static AmazonS3 getS3Client2() { 
+        return AmazonS3ClientBuilder.standard().withRegion(Regions.DEFAULT_REGION).build(); 
+    } 
 } 
  
